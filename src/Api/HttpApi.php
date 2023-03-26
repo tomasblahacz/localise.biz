@@ -176,6 +176,13 @@ abstract class HttpApi
             $message = $content['error'];
         }
 
+        $message = sprintf(
+            'Failed to download translations. Body: %s, Status code: %s, Message: %s',
+            $body,
+            $response->getStatusCode(),
+            $message
+        );
+
         switch ($response->getStatusCode()) {
             case 401:
                 throw new DomainExceptions\InvalidApiKeyException($message);
